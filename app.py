@@ -5,9 +5,9 @@ from fastapi import FastAPI, HTTPException
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
-import main.models as models
-import main.schemas as schemas
-from main.database import engine, session
+import models
+import schemas
+from database import engine, session
 
 
 @asynccontextmanager
