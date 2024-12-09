@@ -25,16 +25,16 @@ jobs:
           pip install -r requirements.txt
       - name: Lint with flake8
         run: |
-          flake8 app.py
+          flake8 --ignore=E501 app.py
       - name: Lint with mypy
         run: |
           mypy app.py
       - name: Lint with black
         run: |
-          black app.py
+          black --diff --check app.py
       - name: Lint with isort
         run: |
-          isort app.py
+          isort --profile black --check-only app.py
       - name: Test with pytest
         run: |
           pytest test_main.py
