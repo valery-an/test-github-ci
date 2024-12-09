@@ -26,15 +26,19 @@ jobs:
       - name: Lint with flake8
         run: |
           flake8 --ignore=E501 app.py
+          flake8 --ignore=E501 main/
       - name: Lint with mypy
         run: |
           mypy app.py
+          mypy main/
       - name: Lint with black
         run: |
           black --diff --check app.py
+          black --diff --check main/
       - name: Lint with isort
         run: |
           isort --profile black --check-only app.py
+          isort --profile black --check-only main/
       - name: Test with pytest
         run: |
           pytest test_main.py
