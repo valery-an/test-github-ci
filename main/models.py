@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 
-class Ingredient(Base):
+class Ingredient(Base):  # type: ignore
     """Модель ингредиента"""
 
     __tablename__ = "ingredients"
@@ -19,7 +19,7 @@ class Ingredient(Base):
     recipe = relationship("Recipe", back_populates="ingredients")
 
 
-class Recipe(Base):
+class Recipe(Base):  # type: ignore
     """Модель рецепта"""
 
     __tablename__ = "recipes"
