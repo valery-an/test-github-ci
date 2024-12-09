@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
-from typing import List
+from typing import List, Sequence
 
-from fastapi import HTTPException, FastAPI
+from fastapi import FastAPI, HTTPException
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
@@ -22,8 +22,8 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-@app.get("/recipes", response_model=List[schemas.RecipeSchemaPreview], tags=['recipes'])
-async def get_recipes() -> List[models.Recipe]:
+@app.get("/recipes", response_model=List[schemas.RecipeSchemaPreview], tags=["recipes"])
+async def get_recipes() -> Sequence[models.Recipe]:
     """Получить список всех рецептов"""
     async with session.begin():
         result = await session.execute(select(models.Recipe))
@@ -58,7 +58,7 @@ async def get_recipe_by_id(recipe_id: int) -> models.Recipe:
         recipe = result.scalar_one_or_none()
         if not recipe:
             raise HTTPException(status_code=404, detail="Recipe not found")
-        recipe.views_amount += 1
+        recipe.views_amount += 1  # type: ignore
         await session.commit()
     return recipe
 
