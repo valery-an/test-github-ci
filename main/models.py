@@ -1,12 +1,13 @@
 from datetime import datetime
 
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, SmallInteger, String
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-from database import Base
+Base = declarative_base()
 
 
-class Ingredient(Base):
+class Ingredient(Base):  # type: ignore
     """Модель ингредиента"""
 
     __tablename__ = "ingredients"
@@ -18,7 +19,7 @@ class Ingredient(Base):
     recipe = relationship("Recipe", back_populates="ingredients")
 
 
-class Recipe(Base):
+class Recipe(Base):  # type: ignore
     """Модель рецепта"""
 
     __tablename__ = "recipes"
