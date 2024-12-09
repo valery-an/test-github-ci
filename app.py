@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from typing import List
 
-from fastapi import FastAPI, HTTPException
+from fastapi import HTTPException, FastAPI
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-@app.get("/recipes", response_model=List[schemas.RecipeSchemaPreview], tags=["recipes"])
+@app.get("/recipes", response_model=List[schemas.RecipeSchemaPreview], tags=['recipes'])
 async def get_recipes() -> List[models.Recipe]:
     """Получить список всех рецептов"""
     async with session.begin():
